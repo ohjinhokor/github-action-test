@@ -23,7 +23,7 @@ jobs:
         run: echo ${{ env.BRANCH_NAME }}
         
       - name: echo
-        run: echo ${{ !startsWith( env.BRANCH_NAME, 'feature') }}
+        run: echo ${{ !startsWith( env.BRANCH_NAME, 'hotfix') }}
         
       - name: branch name check
         if: ${{ !startsWith(env.BRANCH_NAME, 'feature') }} && ${{ !startsWith(env.BRANCH_NAME, 'hotfix') }} 
