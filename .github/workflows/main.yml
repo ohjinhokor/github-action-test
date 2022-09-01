@@ -1,0 +1,24 @@
+
+name: test
+
+on:
+  workflow_dispatch:
+
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: branch name check
+        if: (github.event_name != 'push') && (contains(github.event.pull_request.head.ref, 'feat') == false) && (contains(github.event.pull_request.head.ref, 'hotfix') == false)
+        run : exit 1
+
+      - name: echo
+        run: echo "hi"
