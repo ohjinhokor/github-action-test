@@ -25,7 +25,7 @@ jobs:
         run: echo ${{ !startsWith( github.event.pull_request.head.ref, 'feature') }}
         
       - name: branch name check
-        if: ${{ !startsWith(github.event.pull_request.head.ref, 'feature') }} 
+        if: ${{ !startsWith($BRANCH_NAME, 'feature') }} 
         # && (startsWith(${{ github.event.pull_request.head.ref }}, 'hotfix/') == false)
         run : exit 1
 
