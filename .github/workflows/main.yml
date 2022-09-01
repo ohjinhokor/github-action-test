@@ -22,7 +22,7 @@ jobs:
       - name: echo
         run: echo ${{ env.BRANCH_NAME }}
       - name: echo
-        run: echo ${{ !startsWith( BRANCH_NAME, 'feature') }}
+        run: echo ${{ !startsWith( env.BRANCH_NAME, 'feature') }}
         
       - name: branch name check
         if: ${{ !startsWith($BRANCH_NAME, 'feature') }} 
