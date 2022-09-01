@@ -26,9 +26,9 @@ jobs:
         run: echo ${{ !startsWith( env.BRANCH_NAME, 'hotfix') }}
         
       - name: echo3
-        run: echo ${{ !startsWith(env.BRANCH_NAME, 'feature') }} && ${{ !startsWith(env.BRANCH_NAME, 'hotfix') }} 
+        run: echo (${{ BRANCH_NAME }} != 'release')  }}
         
       - name: branch name check
-        if: ${{ !startsWith(env.BRANCH_NAME, 'feature') }} && ${{ !startsWith(env.BRANCH_NAME, 'hotfix') }} 
+        if: ${{ !startsWith(env.BRANCH_NAME, 'feature') }} && ${{ !startsWith(env.BRANCH_NAME, 'hotfix') }} && (${{ BRANCH_NAME }} != 'main')  }} && (${{ BRANCH_NAME }} != 'cbt')  }} && (${{ BRANCH_NAME }} != 'release')  }}
         run : exit 1
 
