@@ -25,6 +25,10 @@ jobs:
       - name: echo2
         run: echo ${{ !startsWith( env.BRANCH_NAME, 'release') }}
         
+      - name: branch name check before
+        if: ${{ env.BRANCH_NAME }} != 'release'
+        run : echo "how"
+        
       - name: branch name check
         if: ${{ !startsWith(env.BRANCH_NAME, 'feature') }} && ${{ !startsWith(env.BRANCH_NAME, 'hotfix') }} && ${{ env.BRANCH_NAME }} != 'main' && ${{ env.BRANCH_NAME }} != 'cbt' && ${{ env.BRANCH_NAME }} != 'release'
         run : exit 1
