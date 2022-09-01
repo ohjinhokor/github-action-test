@@ -19,11 +19,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: echo
+      - name: echo1
         run: echo ${{ env.BRANCH_NAME }}
         
-      - name: echo
+      - name: echo2
         run: echo ${{ !startsWith( env.BRANCH_NAME, 'hotfix') }}
+        
+      - name: echo3
+        run: echo (${{ !startsWith(env.BRANCH_NAME, 'feature') }}) && (${{ !startsWith(env.BRANCH_NAME, 'hotfix') }}) 
         
       - name: branch name check
         if: (${{ !startsWith(env.BRANCH_NAME, 'feature') }}) && (${{ !startsWith(env.BRANCH_NAME, 'hotfix') }}) 
