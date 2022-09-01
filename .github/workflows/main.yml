@@ -21,11 +21,11 @@ jobs:
 
       - name: echo
         run: echo ${{ env.BRANCH_NAME }}
+        
       - name: echo
         run: echo ${{ !startsWith( env.BRANCH_NAME, 'feature') }}
         
       - name: branch name check
-        if: ${{ !startsWith(env.BRANCH_NAME, 'feature') }} 
-        # && (startsWith(${{ github.event.pull_request.head.ref }}, 'hotfix/') == false)
+        if: ${{ !startsWith(env.BRANCH_NAME, 'feature') }} && ${{ !startsWith(env.BRANCH_NAME, 'hotfix/') }} 
         run : exit 1
 
