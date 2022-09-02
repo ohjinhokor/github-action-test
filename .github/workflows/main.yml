@@ -12,7 +12,7 @@ env:
 
 jobs:
   branch-check:
-    runs-on: [k8s]
+    runs-on: ubuntu-latest
     outputs:
       pass: ${{ steps.branch-name-check.outputs.pass }}
     steps:
@@ -23,7 +23,7 @@ jobs:
   pre-requirements-check:
     needs: branch-check
     if: ${{ needs.branch-check.outputs.pass == true }}
-    runs-on: [k8s]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
