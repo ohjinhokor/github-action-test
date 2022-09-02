@@ -21,7 +21,7 @@ jobs:
         run : echo "::set-output name=pass::true"
       
       - name: echo pass
-        run: echo ${{ pass }}
+        run: echo $ {{ pass }}
         
   pre-requirements-check:
     needs: branch-check
