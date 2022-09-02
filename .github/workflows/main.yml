@@ -17,11 +17,10 @@ jobs:
       pass: ${{ steps.branch-name-check.outputs.pass }}
     steps:
       - name: branch name check
+        id: branch-name-check
         if: ${{ !startsWith(env.BRANCH_NAME, 'feature/') && !startsWith(env.BRANCH_NAME, 'hotfix/') && env.BRANCH_NAME != 'main' && env.BRANCH_NAME != 'cbt' && env.BRANCH_NAME != 'release' }}
         run : echo "::set-output name=pass::true"
-        
-      - name: echo pass
-        run: echo  ${{ pass }}
+      - run: echo ${{ pass }}
         
   pre-requirements-check:
     needs: branch-check
