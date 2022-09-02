@@ -9,12 +9,21 @@ on:
     
 env:
   BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
-  
+
 jobs:
-
-  build:
+  branch-check:
+    runs-on: [k8s]
+    outputs:
+      pass: ${{ steps.branch-name-check.outputs.pass }}
+    steps:
+      - name: branch name check
+        if: ${{ !startsWith(env.BRANCH_NAME, 'feature/') && !startsWith(env.BRANCH_NAME, 'hotfix/') && env.BRANCH_NAME != 'main' && env.BRANCH_NAME != 'cbt' && env.BRANCH_NAME != 'release' }}
+        run : echo "::set-output name=pass::true"
+        
+  pre-requirements-check:
+    needs: branch-check
+    if: ${{ needs.branch-check.outputs.pass == true }}
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -29,7 +38,8 @@ jobs:
         if: ${{ env.BRANCH_NAME != 'release' }}
         run : echo "not same"
         
-      - name: branch name check
-        if: ${{ !startsWith(env.BRANCH_NAME, 'feature/') && !startsWith(env.BRANCH_NAME, 'hotfix/') && env.BRANCH_NAME != 'main' && env.BRANCH_NAME != 'cbt' && env.BRANCH_NAME != 'release' }}
-        run : exit 1
+      - name: finish
+        run : echo "finish"
+        
+
 
